@@ -17,7 +17,7 @@ bot = telebot.TeleBot(bot_token)
 
 @bot.message_handler(commands=['start', 'Start']) 
 def send_message(command): 
-    bot.send_message(chat_id, "☣ Python-RAT Running ☣" +
+    bot.send_message(chat_id, "🐍 Python-RAT Running 🐍" +
                      "\n\nЧтобы узнать команды введи команду /commands" +
                      "\nCoded by Dnspy | ds: DNSP ") 
     
