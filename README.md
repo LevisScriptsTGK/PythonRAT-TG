@@ -6,7 +6,7 @@
 ### Python-Rat Commands
 /Screen 
 /Info 
-/bosd 
+/bsod 
 /kill_process name.exe 
 /Pwd 
 /autostart 
