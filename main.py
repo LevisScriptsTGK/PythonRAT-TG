@@ -49,6 +49,7 @@ def send_webscreen(command) :
          cap.read()
     ret, frame = cap.read()
     file = cv2.imwrite('cam.png', frame)
+    cap.release()
     files = {'photo': file } 
     requests.post("https://api.telegram.org/bot" + bot_token + "/sendPhoto?chat_id=" + chat_id , files=files) 
 
