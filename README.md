@@ -5,17 +5,19 @@
 
 ### Python-Rat Commands
 /Screen 
-/Info
-/kill_process name.exe
+/Info 
+/bosd 
+/kill_process name.exe 
 /Pwd 
-/passwords chrome
-/passwords opera
+/autostart 
+/passwords chrome 
+/passwords opera 
 /Cmd command 
 /Open_url 
 /Ls 
-/Cd folder
+/Cd folder 
 /Download 
-/Rm_dir
-/About 
+/Rm_dir 
+/About  
     
 
